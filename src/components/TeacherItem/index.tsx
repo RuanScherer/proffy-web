@@ -2,30 +2,40 @@ import React from 'react'
 import whatsappIcon from '../../assets/images/icons/whatsapp.svg'
 import './styles.css'
 
-const TeacherItem = () => {
+export interface Teacher {
+    name: string
+    avatar: string
+    subject: string
+    whatsapp: string
+    bio: string
+    cost: number
+    id: number
+}
+
+interface TeacherItemProps {
+    teacher: Teacher
+}
+
+const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
     return (
         <article className="teacher-item">
             <header>
-                <img src="https://avatars0.githubusercontent.com/u/50061559?s=460&u=c852aeac2cf92ba5f8335515be54da3d5d68ffeb&v=4" alt="Ruan Scherer"/>
+                <img src={teacher.avatar} alt={teacher.name}/>
                 <div>
-                    <strong>Ruan Scherer</strong>
-                    <span>Matemática</span>
+                    <strong>{teacher.name}</strong>
+                    <span>{teacher.subject}</span>
                 </div>
             </header>
-            <p>
-                Faço uns cálculos malucos.
-                <br/><br/>
-                Não me pergunte de onde vem os resultados, eles apenas aparecem.
-            </p>
+            <p>{teacher.bio}</p>
             <footer>
                 <p>
                     Preço/Hora
-                    <strong>R$80,00</strong>
+                    <strong>R${teacher.cost}</strong>
                 </p>
-                <button type="button">
+                <a href={`https://wa.me/${teacher.whatsapp}`} rel="noopener" target="_blank">
                     <img src={whatsappIcon} alt="Whatsapp"/>
                     Entrar em contato
-                </button>
+                </a>
             </footer>
         </article>
     )
