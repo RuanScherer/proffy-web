@@ -28,7 +28,7 @@ function Register() {
         api.post('/users', { name, email, password })
             .then(response => {
                 localStorage.setItem("accessToken", response.data.token)
-                window.location.replace("/home")
+                window.location.replace("/register-success")
             })
             .catch(err => {
                 console.log(err)

@@ -5,6 +5,7 @@ import Landing from './pages/Landing'
 import TeacherList from './pages/TeacherList'
 import TeacherForm from './pages/TeacherForm'
 import Register from './pages/Register'
+import RegisterSuccess from './pages/RegisterSuccess'
 
 function Routes() {
     const isLogged = localStorage.getItem('accessToken') ? true : false
@@ -31,6 +32,7 @@ function Routes() {
         <BrowserRouter>
             <PublicRoute exact path="/" component={Login}/>
 			<PublicRoute path="/register" component={Register}/>
+			<PrivateRoute path="/register-success" component={RegisterSuccess}/>
             <PrivateRoute path="/home" component={Landing}/>
             <PrivateRoute path="/study" component={TeacherList}/>
             <PrivateRoute path="/give-classes" component={TeacherForm}/>
