@@ -107,8 +107,15 @@
     background-color: #FFF;
 }
 
-#page-landing-content header h2 {
+#page-landing-content header a {
     font-size: 1.6rem;
+    color: var(--color-text-in-primary);
+    text-decoration: none;
+    transition: color .2s;
+}
+
+#page-landing-content header a:hover {
+    color: var(--color-box-base);
 }
 
 #page-landing-content header button {

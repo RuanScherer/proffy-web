@@ -26,7 +26,7 @@ function Landing() {
                 <header>
                     <div className="user">
                         <img src={avatar ? avatar : "https://api.adorable.io/avatars/220/abott@adorable.png"} />
-                        <h2>{name}</h2>
+                        <Link to="/profile">{name}</Link>
                     </div>
                     <button onClick={() => logout()}>
                         <img src={logoutIcon} alt="Encerrar sessão"/>
