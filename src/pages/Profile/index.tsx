@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import background from '../../assets/images/vertical-background.svg'
 import backIcon from '../../assets/images/icons/back.svg'
@@ -18,10 +18,11 @@ function Profile() {
     const [avatar, setAvatar] = useState("")
     const [whatsapp, setWhatsapp] = useState("")
     const [bio, setBio] = useState("")
-    const [loadError, setLoadError] = useState(false)
+    const [error, setError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
+    const { id } = getTokenData()
 
     useEffect(() => {
-        const { id } = getTokenData()
         api.get(`users/${id}`)
             .then(response => {
                 const { user } = response.data
@@ -33,13 +34,32 @@ function Profile() {
             })
             .catch(err => {
                 console.log(err)
-                setLoadError(true)
+                setError(true)
+                setErrorMessage("Erro ao carregar as informações do seu perfil, tente novamente.")
             })
     }, [])
+
+    function handleSaveProfileChanges(event: FormEvent) {
+        event.preventDefault()
+        api.put(`users/${id}`, {
+            name,
+            email,
+            avatar,
+            whatsapp,
+            bio
+        }).then(response => {
+            localStorage.setItem("accessToken", response.data.token)
+            window.location.replace('/home')
+        }).catch(err => {
+            console.log(err)
+            setError(true)
+            setErrorMessage("Erro ao salvar as informações do seu perfil, tente novamente.")
+        })
+    }
     
     return (
         <div id="page-profile">
-            <Toast visible={loadError} text="Erro ao carregar as informações do seu perfil, tente novamente."/>
+            <Toast visible={error} text={errorMessage} />
             <div id="page-profile-content">
                 <header>
                     <div className="header-content">
@@ -58,39 +78,43 @@ function Profile() {
                                 <img src={cameraIcon} alt="Camẽra"/>
                             </button>
                         </div>
-                        <h1>Ruan Scherer</h1>
+                        <h1>{name}</h1>
                         <h2>Matemática</h2>
                     </div>
                 </section>
-                <form className="container">
+                <form className="container" onSubmit={handleSaveProfileChanges}>
                     <fieldset>
                         <legend>Seus dados</legend>
                         <Input 
                             name="name" 
                             label="Nome completo"
                             value={name}
+                            onChange={event => setName(event.target.value)}
                         />
                         <Input 
                             name="email" 
                             label="E-mail"
                             value={email}
+                            onChange={event => setEmail(event.target.value)}
                         />
                         <Input 
                             name="whatsapp" 
                             label="Whatsapp"
                             value={whatsapp}
+                            onChange={event => setWhatsapp(event.target.value)}
                         />
                         <Textarea 
                             name="bio" 
                             label="Biografia"
                             value={bio}
+                            onChange={event => setBio(event.target.value)}
                         />
                     </fieldset>
                     <footer>
                         <p>
                             <img src={warningIcon} alt="Aviso importante"/>
                             Importante! <br/>
-                            Preencha todos os dados
+                            Preencha todos os dados corretamente
                         </p>
                         <button type="submit">Salvar cadastro</button>
                     </footer>
