@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react'
+import React, { useState, FormEvent, useEffect } from 'react'
 import PageHeader from '../../components/PageHeader'
 import Input from '../../components/Input'
 import warningIcon from '../../assets/images/icons/warning.svg'
@@ -6,6 +6,8 @@ import Textarea from '../../components/Textarea'
 import Select from '../../components/Select'
 import api from '../../services/api'
 import { useHistory } from 'react-router-dom'
+import { getTokenData } from '../../utilities/auth'
+import Toast from '../../components/Toast'
 import './styles.css'
 
 function TeacherForm() {
@@ -16,7 +18,26 @@ function TeacherForm() {
     const [subject, setSubject] = useState("")
     const [cost, setCost] = useState("")
     const [scheduleItems, setScheduleItems] = useState([{ week_day: 1, from: '', to:''}])
+    const [error, setError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
+    const { id } = getTokenData()
     const history = useHistory()
+
+    useEffect(() => {
+        api.get(`users/${id}`)
+            .then(response => {
+                const { user } = response.data
+                setName(user.name)
+                setAvatar(user.avatar)
+                setWhatsapp(user.whatsapp)
+                setBio(user.bio)
+            })
+            .catch(err => {
+                console.log(err)
+                setError(true)
+                setErrorMessage("Erro ao carregar as informações do seu perfil, tente novamente.")
+            })
+    }, [])
 
     function addNewScheduleItem() {
         setScheduleItems([...scheduleItems, { week_day: 1, from: '', to:''}])
@@ -43,6 +64,7 @@ function TeacherForm() {
 
     return (
         <div id="page-teacher-form" className="container">
+            <Toast visible={error} text={errorMessage} />
             <PageHeader 
                 title="Que incrível que você quer dar aulas."
                 description="O primeiro passo é preencher esse formulário de inscrição"
@@ -51,29 +73,23 @@ function TeacherForm() {
                 <form onSubmit={handleCreateClass}>
                     <fieldset>
                         <legend>Seus dados</legend>
-                        <Input 
-                            name="name"
-                            label="Nome completo"
-                            value={name}
-                            onChange={event => setName(event.target.value)}
-                        />
-                        <Input 
-                            name="avatar" 
-                            label="Avatar"
-                            value={avatar}
-                            onChange={event => setAvatar(event.target.value)}
-                        />
-                        <Input 
-                            name="whatsapp" 
-                            label="Whatsapp"
-                            value={whatsapp}
-                            onChange={event => setWhatsapp(event.target.value)}
-                        />
+                        <div className="user-data-grid">
+                            <div className="user">
+                                <img src={avatar || "https://api.adorable.io/avatars/220/abott@adorable.png"} alt="Avatar" />
+                                <h1>{name}</h1>
+                            </div>
+                            <Input 
+                                name="whatsapp" 
+                                label="Whatsapp"
+                                value={whatsapp || "(  ) _ ____ ____"}
+                                disabled
+                            />
+                        </div>
                         <Textarea 
                             name="bio" 
                             label="Biografia"
                             value={bio}
-                            onChange={event => setBio(event.target.value)}
+                            disabled
                         />
                     </fieldset>
                     <fieldset>
