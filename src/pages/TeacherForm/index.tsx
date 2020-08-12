@@ -34,10 +34,15 @@ function TeacherForm() {
             })
             .catch(err => {
                 console.log(err)
-                setError(true)
-                setErrorMessage("Erro ao carregar as informações do seu perfil, tente novamente.")
+                showError("Erro ao carregar as informações do seu perfil, tente novamente.")
             })
     }, [])
+
+    function showError(message: string) {
+        setError(true)
+        setErrorMessage("Erro ao carregar as informações do seu perfil, tente novamente.")
+        setTimeout(() => setError(false), 5000)
+    }
 
     function addNewScheduleItem() {
         setScheduleItems([...scheduleItems, { week_day: 1, from: '', to:''}])
@@ -54,7 +59,7 @@ function TeacherForm() {
         api.post('/classes', {
             name, avatar, whatsapp, bio, subject, cost: Number(cost), schedule: scheduleItems
         }).then(() => history.replace('/'))
-        .catch(() => alert('Erro ao cadastrar.'))
+        .catch(() => showError("Erro ao carregar suas aulas, tente novamente."))
     }
 
     function setScheduleItemValue(position: number, field: string, value: string) {
