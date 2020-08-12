@@ -43,6 +43,11 @@ function TeacherForm() {
         setScheduleItems([...scheduleItems, { week_day: 1, from: '', to:''}])
     }
 
+    function removeScheduleItem(event: React.MouseEvent<HTMLButtonElement, MouseEvent>, index: number) {
+        event.preventDefault()
+        setScheduleItems(array => array.filter((_, itemIndex) => index !== itemIndex))
+    }
+
     function handleCreateClass(event: FormEvent) {
         event.preventDefault()
 
@@ -127,7 +132,7 @@ function TeacherForm() {
                             </button>
                         </legend>
                         { scheduleItems.map((item, index) => (
-                            <div className="schedule-item" key={item.week_day}>
+                            <div className="schedule-item" key={index}>
                                 <Select 
                                     name="week_day"
                                     label="Dia da semana"
@@ -157,6 +162,11 @@ function TeacherForm() {
                                     value={item.to}
                                     onChange={event => setScheduleItemValue(index, 'to', event.target.value)}
                                 />
+                                <div className="remove-schedule-item">
+                                    <hr/>
+                                    <button onClick={event => removeScheduleItem(event, index)}>Remover</button>
+                                    <hr/>
+                                </div>
                             </div>
                         ))}
                     </fieldset>
