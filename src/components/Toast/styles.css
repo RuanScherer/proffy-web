@@ -1,0 +1,37 @@
+.toast {
+    display: none;
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    z-index: 100;
+    padding: 1rem 1.5rem;
+    border-radius: .8rem;
+    color: var(--color-title-in-primary);
+    background-color: var(--color-red);
+    max-width: 350px;
+    box-shadow: 0 1px 8px #6A6180;
+    font-family: Archivo;
+    line-height: 2.2rem;
+    font-size: 1.7rem;
+    animation: fade .5s ease-in-out;
+}
+
+.toast[data-visible="true"] {
+    display: block;
+    animation: fade .5s;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+        right: -360px;
+    }
+    50% {
+        opacity: .75;
+        right: 30px
+    }
+    100% {
+        opacity: 1;
+        right: 10px;
+    }
+}

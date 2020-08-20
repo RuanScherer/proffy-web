@@ -74,27 +74,86 @@
     background-color: var(--color-secundary-dark);
 }
 
-.total-connections {
-    font-size: 1.4rem;
+#info .welcome {
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    padding-right: 5rem;
 }
 
-.total-connections img {
-    margin-left: .8rem;
+#info .total-connections {
+    font-size: 1.4rem;
+    text-align: right;
+}
+
+#page-landing-content header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 3.5rem;
+}
+
+#page-landing-content header .user {
+    display: flex;
+    align-items: center;
+}
+
+#page-landing-content header .user img {
+    margin-right: 1.2rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background-color: #FFF;
+}
+
+#page-landing-content header a {
+    font-size: 1.6rem;
+    color: var(--color-text-in-primary);
+    text-decoration: none;
+    transition: color .2s;
+}
+
+#page-landing-content header a:hover {
+    color: var(--color-box-base);
+}
+
+#page-landing-content header button {
+    background-color: var(--color-primary-dark);
+    border: 0;
+    border-radius: .8rem;
+    width: 5rem;
+    height: 5rem;
+    color: var(--color-text-in-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color .2s;
+}
+
+#page-landing-content header button:hover {
+    background-color: var(--color-primary-darker);
 }
 
 @media (min-width: 1100px) {
     #page-landing-content {
         max-width: 1100px;
+    }
+
+    #page-landing-content .landing-grid {
+        max-width: 1100px;
         display: grid;
-        grid-template-rows: 350px 1fr;
         grid-template-columns: 2fr 1fr 1fr;
-        grid-template-areas: 
-            "logo hero hero"
-            "buttons buttons total"    
-        ;
+    }
+
+    #banner {
+        grid-template-rows: 350px;
+        grid-template-areas:  "logo hero hero";
+    }
+
+    #info {
+        grid-template-areas:  "welcome welcome buttons";
     }
 
     .logo-container {
@@ -127,8 +186,7 @@
         font-size: 2.4rem;
     }
 
-    .total-connections {
-        grid-area: total;
-        justify-self: end;
-    }
+    .welcome {
+        grid-area: welcome;
+    }    
 }

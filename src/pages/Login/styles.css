@@ -1,0 +1,185 @@
+#page-login {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--color-text-in-primary);
+    background-color: var(--color-primary);
+}
+
+#page-login-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#page-login .logo-container {
+    grid-area: logo;
+    height: 100%;
+    padding: 5rem;
+}
+
+#page-login .logo-container main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    background-size: contain;
+}
+
+#page-login .logo-container main img {
+    height: 10rem;
+}
+
+#page-login .logo-container main h2 {
+    font-weight: 500;
+    font-size: 2.4rem;
+    line-height: 3.4rem;
+    margin-top: .8rem;
+    max-width: 300px;
+}
+
+#page-login .login-container {
+    padding: 6rem;
+    background-color: var(--color-background);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#page-login .login-container h1 {
+    color: var(--color-text-title);
+    margin-bottom: 2.8rem;
+}
+
+#page-login .login-container .input-block, #page-login .login-container .input-block input {
+    margin: 0 auto !important;
+    border-radius: 0 !important;
+}
+
+#page-login .login-container .input-block label {
+    position: absolute;
+    top: 6px;
+    left: 1.6rem;
+    z-index: 5;
+    color: var(--color-text-complement);
+}
+
+#page-login .login-container .input-block input {
+    padding: 3.2rem 1.6rem;
+    position: relative;
+}
+
+#page-login .login-container .input-block:focus-within::after {
+    height: calc(100% - 2.8rem);
+    width: 2px;
+    content: '';
+    background-color:  var(--color-primary-light);
+    position: absolute;
+    left: 0;
+    bottom: 1.4rem;
+    top: 1.4rem;
+}
+
+#page-login .login-container .input-block .first-input {
+    border-radius: .8rem .8rem 0 0 !important;
+}
+
+#page-login .login-container .input-block .last-input {
+    border-radius: 0 0 .8rem .8rem !important;
+}
+
+#page-login .login-container .form-actions {
+    margin-top: 2rem;
+    color: var(--color-text-complement);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#page-login .login-container .form-actions .input-check {
+    display: flex;
+    align-items: center;
+}
+
+#page-login .login-container .form-actions .input-check label {
+    margin-left: 1rem;
+}
+
+#page-login .login-container .form-actions .input-check input {
+    border-radius: .8rem !important;
+}
+
+#page-login .login-container .form-actions a {
+    text-decoration: none;
+    color: var(--color-text-complement) !important;
+    text-align: right;
+}
+
+#page-login .login-container form button {
+    width: 100%;
+    height: 5.6rem;
+    background-color: var(--color-secundary);
+    color: var(--color-button-text);
+    border: 0;
+    border-radius: .8rem;
+    cursor: pointer;
+    font: 700 1.6rem Archivo;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background-color .2s;
+    margin-top: 3.2rem;
+}
+
+#page-login .login-container form button:hover {
+    background-color: var(--color-secundary-dark);
+}
+
+#page-login .login-container form button:disabled {
+    background-color: var(--color-disabled-background);
+    color: var(--color-text-complement);
+    cursor: not-allowed;
+}
+
+#page-login .login-container footer {
+    margin-top: 5rem;
+    display: flex;
+    justify-content: space-between;
+    color: var(--color-text-complement);
+}
+
+#page-login .login-container footer .left-side span {
+    color: var(--color-text-base);
+}
+
+#page-login .login-container footer .left-side a {
+    color: var(--color-primary);
+    font-weight: 700
+}
+
+@media (min-width: 1000px) {
+    #page-login-content {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        grid-template-areas: "logo login";
+    }
+
+    #page-login .login-container {
+        height: 100vh;
+        grid-area: login;
+        padding: 6rem;
+        background-color: var(--color-background);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}

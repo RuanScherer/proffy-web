@@ -37,6 +37,39 @@
     width: 90%
 }
 
+#page-teacher-list main .page-actions {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+#page-teacher-list main .page-actions button {
+    width: 20rem;
+    height: 5.6rem;
+    background-color: var(--color-primary);
+    color: #FFF;
+    border: 0;
+    border-radius: .8rem;
+    cursor: pointer;
+    font: 700 1.6rem Archivo;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .2s;
+}
+
+#page-teacher-list main .page-actions button:hover {
+    background-color: var(--color-primary-dark);
+}
+
+#page-teacher-list main .page-actions button:disabled {
+    background-color: var(--color-disabled-background);
+    color: var(--color-text-complement);
+    cursor: not-allowed;
+}
+
 @media (min-width: 700px) {
     #page-teacher-list {
         max-width: 100%;
